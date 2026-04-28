@@ -1,22 +1,8 @@
 # 🎵 Vocal Remover Pro - الإصدار السحابي
 
-[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
-[![Python 3.8+](https://img.shields.io/badge/python-3.8+-blue.svg)](https://www.python.org/downloads/)
-[![Hugging Face Spaces](https://img.shields.io/badge/🤗-Hugging%20Face%20Spaces-blue)](https://huggingface.co/spaces)
-[![GitHub stars](https://img.shields.io/github/stars/YOUR_USERNAME/vocal-remover-pro?style=social)](https://github.com/YOUR_USERNAME/vocal-remover-pro/stargazers)
-[![GitHub forks](https://img.shields.io/github/forks/YOUR_USERNAME/vocal-remover-pro?style=social)](https://github.com/YOUR_USERNAME/vocal-remover-pro/network/members)
-[![GitHub issues](https://img.shields.io/github/issues/YOUR_USERNAME/vocal-remover-pro)](https://github.com/YOUR_USERNAME/vocal-remover-pro/issues)
-[![Last Commit](https://img.shields.io/github/last-commit/YOUR_USERNAME/vocal-remover-pro)](https://github.com/YOUR_USERNAME/vocal-remover-pro/commits/main)
-
-<div align="center">
-
 **افصل الأصوات عن الموسيقى بدقة عالية باستخدام الذكاء الاصطناعي!**
 
 تطبيق متقدم لفصل المسارات الصوتية (Vocals, Drums, Bass, Other) يعمل على أي جهاز من خلال المتصفح.
-
-[جرب التطبيق الآن 🚀](#-استخدام-التطبيق) | [التثبيت السريع ⬇️](#-التثبيت-والاستخدام) | [الدليل الكامل 📚](#-الوثائق-الكاملة) | [الإبلاغ عن مشكلة 🐛](https://github.com/YOUR_USERNAME/vocal-remover-pro/issues/new/choose)
-
-</div>
 
 ---
 
@@ -41,22 +27,16 @@
 
 **لا يحتاج تثبيت! فقط اضغط وشغّل:**
 
-1. **افتح التطبيق:**
-   ```
-   https://huggingface.co/spaces/YOUR_USERNAME/vocal-remover-pro
-   ```
-
+1. **افتح التطبيق** في المتصفح
 2. **ارفع ملفك** أو أدخل رابط URL
-
 3. **اضغط "ابدأ فصل الملف"** وانتظر النتيجة
-
 4. **حمّل الملفات المفصولة** (Vocals, Drums, Bass, Other)
 
 ### خيار 2: التشغيل المحلي (للمطورين)
 
 ```bash
 # 1. استنساخ المشروع
-git clone https://github.com/YOUR_USERNAME/vocal-remover-pro.git
+git clone <رابط-المشروع>
 cd vocal-remover-pro
 
 # 2. تثبيت المتطلبات (يتطلب Python 3.8+)
@@ -71,12 +51,7 @@ python app_cloud.py
 
 ### خيار 3: نشر نسختك الخاصة على Hugging Face
 
-```bash
-# اتبع الخطوات في دليل النشر
-# سيستغرق 5 دقائق فقط!
-```
-
-📖 **اقرأ:** [دليل النشر الكامل →](DEPLOYMENT_GUIDE.md)
+اتبع الخطوات في دليل النشر (سيستغرق 5 دقائق فقط!)
 
 ---
 
@@ -84,13 +59,13 @@ python app_cloud.py
 
 | الدليل | الوصف | لمن هذا الدليل؟ |
 |--------|-------|----------------|
-| [🚀 دليل البدء السريع](QUICK_START.md) | ابدأ استخدام التطبيق في 3 دقائق | المستخدمين الجدد |
-| [☁️ دليل النشر](DEPLOYMENT_GUIDE.md) | انشر التطبيق على GitHub و Hugging Face خطوة بخطوة | المطورين |
-| [🔧 حل المشاكل](TROUBLESHOOTING_AR.md) | حلول مفصلة للمشاكل الشائعة | الجميع |
-| [📝 دليل المساهمين](CONTRIBUTING.md) | كيف تساهم في المشروع | المساهمين المحتملين |
-| [📋 قائمة التحقق من الإصدار](RELEASE_CHECKLIST.md) | Checklist احترافي للإصدارات | المُصيّنين |
-| [🤖 دليل تسليم AI](AI_HANDOFF_AR.md) | معلومات تقنية للذكاء الاصطناعي | المطورين وAI bots |
-| [📦 ملخص المشروع](PROJECT_SUMMARY.md) | نظرة عامة شاملة على المشروع | الجميع |
+| دليل البدء السريع | ابدأ استخدام التطبيق في 3 دقائق | المستخدمين الجدد |
+| دليل النشر | انشر التطبيق على GitHub و Hugging Face خطوة بخطوة | المطورين |
+| حل المشاكل | حلول مفصلة للمشاكل الشائعة | الجميع |
+| دليل المساهمين | كيف تساهم في المشروع | المساهمين المحتملين |
+| قائمة التحقق من الإصدار | Checklist احترافي للإصدارات | المُصيّنين |
+| دليل تسليم AI | معلومات تقنية للذكاء الاصطناعي | المطورين وAI bots |
+| ملخص المشروع | نظرة عامة شاملة على المشروع | الجميع |
 
 ---
 
@@ -177,13 +152,11 @@ vocal-remover-pro/
 
 ### تخصيص رابط التحديثات
 
-في `app_cloud.py`، عدّل السطر التالي:
+في `app_cloud.py`، عدّل السطر التالي واستبدل الرابط برابطك الخاص:
 
 ```python
-MANIFEST_URL = "https://raw.githubusercontent.com/YOUR_USERNAME/vocal-remover-pro/main/update_manifest.json"
+MANIFEST_URL = "<رابط-الmanifest-الخاص-بك>"
 ```
-
-استبدل `YOUR_USERNAME` باسم المستخدم الخاص بك على GitHub.
 
 ### تغيير نموذج الذكاء الاصطناعي
 
@@ -224,10 +197,10 @@ ENV PYTORCH_CUDA_ALLOC_CONF=max_split_size_mb:512
 
 ### الحصول على المساعدة
 
-1. **اقرأ أولاً:** [دليل حل المشاكل الشاملة](TROUBLESHOOTING_AR.md)
-2. **ابحث:** [في المشاكل الموجودة](https://github.com/YOUR_USERNAME/vocal-remover-pro/issues?q=is%3Aissue)
-3. **اسأل المجتمع:** [في قسم النقاشات](https://github.com/YOUR_USERNAME/vocal-remover-pro/discussions)
-4. **ابلغ عن مشكلة جديدة:** [افتح Issue جديد](https://github.com/YOUR_USERNAME/vocal-remover-pro/issues/new/choose)
+1. **اقرأ أولاً:** دليل حل المشاكل الشاملة
+2. **ابحث:** في المشاكل الموجودة على GitHub
+3. **اسأل المجتمع:** في قسم النقاشات
+4. **ابلغ عن مشكلة جديدة:** افتح Issue جديد على GitHub
 5. **للطوارئ:** استخدم زر **"🔍 تقرير التشخيص"** في التطبيق وأرفقه مع البلاغ
 
 ### قالب الإبلاغ عن مشكلة
@@ -272,8 +245,8 @@ ENV PYTORCH_CUDA_ALLOC_CONF=max_split_size_mb:512
 
 ### كيف تبدأ؟
 
-1. اقرأ [دليل المساهمين الكامل](CONTRIBUTING.md)
-2. ابحث عن [Issues مفتوحة](https://github.com/YOUR_USERNAME/vocal-remover-pro/issues?q=is%3Aopen+is%3Aissue+label%3A%22good+first+issue%22) مناسبة للمبتدئين
+1. اقرأ دليل المساهمين الكامل
+2. ابحث عن Issues مفتوحة مناسبة للمبتدئين على GitHub
 3. Fork المشروع وأنشئ فرع جديد
 4. قدّم Pull Request مع وصف واضح للتغييرات
 
@@ -292,20 +265,18 @@ ENV PYTORCH_CUDA_ALLOC_CONF=max_split_size_mb:512
 - © ذكر المؤلف الأصلي
 - 📄 تضمين نص الترخيص
 
-📖 **اقرأ الترخيص الكامل:** [LICENSE](LICENSE)
-
 ---
 
 ## 🙏 شكر وتقدير
 
 هذا المشروع مبني بفضل أدوات رائعة من المجتمع المفتوح المصدر:
 
-| المشروع | الرابط | الشكر |
-|---------|--------|-------|
-| **Demucs** | [facebookresearch/demucs](https://github.com/facebookresearch/demucs) | محرك الفصل الصوتي الأروع |
-| **Gradio** | [gradio.app](https://gradio.app/) | واجهة سهلة وقوية |
-| **Hugging Face** | [huggingface.co](https://huggingface.co/) | استضافة سحابية مجانية |
-| **PyTorch** | [pytorch.org](https://pytorch.org/) | إطار عمل الذكاء الاصطناعي |
+| المشروع | الشكر |
+|---------|-------|
+| **Demucs** | محرك الفصل الصوتي الأروع |
+| **Gradio** | واجهة سهلة وقوية |
+| **Hugging Face** | استضافة سحابية مجانية |
+| **PyTorch** | إطار عمل الذكاء الاصطناعي |
 
 ---
 
@@ -313,27 +284,12 @@ ENV PYTORCH_CUDA_ALLOC_CONF=max_split_size_mb:512
 
 | المنصة | الرابط |
 |--------|--------|
-| **GitHub** | [@YOUR_USERNAME](https://github.com/YOUR_USERNAME) |
-| **Hugging Face** | [YOUR_USERNAME](https://huggingface.co/YOUR_USERNAME) |
+| **GitHub** | صفحة المشروع على GitHub |
 | **Email** | your.email@example.com |
-| **Twitter** | @YOUR_USERNAME (اختياري) |
-| **Discord** | [رابط السيرفر] (اختياري) |
 
 ---
 
 ## 📈 إحصائيات المشروع
-
-<div align="center">
-
-![GitHub Stars](https://img.shields.io/github/stars/YOUR_USERNAME/vocal-remover-pro?style=social)
-![GitHub Forks](https://img.shields.io/github/forks/YOUR_USERNAME/vocal-remover-pro?style=social)
-![GitHub Issues](https://img.shields.io/github/issues/YOUR_USERNAME/vocal-remover-pro)
-![GitHub Pull Requests](https://img.shields.io/github/issues-pr/YOUR_USERNAME/vocal-remover-pro)
-![GitHub Contributors](https://img.shields.io/github/contributors/YOUR_USERNAME/vocal-remover-pro)
-![Last Commit](https://img.shields.io/github/last-commit/YOUR_USERNAME/vocal-remover-pro)
-![License](https://img.shields.io/github/license/YOUR_USERNAME/vocal-remover-pro)
-
-</div>
 
 ---
 
@@ -343,18 +299,10 @@ ENV PYTORCH_CUDA_ALLOC_CONF=max_split_size_mb:512
 
 **⭐ قم بتقييم المشروع على GitHub لدعمنا! ⭐**
 
-[Rating Badge](https://img.shields.io/github/stars/YOUR_USERNAME/vocal-remover-pro?style=social)
-
 **شارك المشروع مع أصدقائك!**
-
-[Share on Twitter](https://twitter.com/intent/tweet?text=Check%20out%20this%20amazing%20AI%20vocal%20remover!&url=https://github.com/YOUR_USERNAME/vocal-remover-pro)
-[Share on Facebook](https://www.facebook.com/sharer/sharer.php?u=https://github.com/YOUR_USERNAME/vocal-remover-pro)
-[Share on LinkedIn](https://www.linkedin.com/shareArticle?mini=true&url=https://github.com/YOUR_USERNAME/vocal-remover-pro)
 
 ---
 
-**Made with ❤️ by YOUR_USERNAME and contributors**
-
-[Contributors](https://github.com/YOUR_USERNAME/vocal-remover-pro/graphs/contributors)
+**Made with ❤️ by the contributors**
 
 </div>

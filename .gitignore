@@ -1,56 +1,65 @@
-```
 # Dependencies
-__pycache__/
-*.pyc
-*.pyo
-*.pyd
+node_modules/
 .venv/
 venv/
+__pycache__/
+.mypy_cache/
+.pytest_cache/
+.julia/
+zig-cache/
+
+# Compiled/Binary files
+*.pyc
+*.class
+*.o
+*.exe
+*.dll
+*.so
+*.a
+*.obj
+*.out
+*.dylib
+*.jar
+*.war
+*.zip
+*.tar.gz
+*.tar
+*.gz
+*.rar
+*.7z
+
+# Build artifacts
+dist/
+build/
+target/
+coverage/
+htmlcov/
+*.egg-info/
+
+# Environment
 .env
 .env.local
-*.env.*
+.env.*
 
-# Python specific
-*.py[cod]
-*$py.class
-*.so
-.Python
-build/
-develop-eggs/
-dist/
-downloads/
-eggs/
-.eggs/
-lib/
-lib64/
-parts/
-sdist/
-var/
-wheels/
-*.egg-info/
-.installed.cfg
-*.egg
-
-# Logs
-*.log
-
-# Editor/IDE
+# Editors
 .vscode/
 .idea/
 *.swp
 *.swo
 *.tmp
 
-# OS
+# System
 .DS_Store
 Thumbs.db
 
-# Coverage
-.coverage
-coverage/
-htmlcov/
+# Logs
+*.log
 
-# Testing
-.pytest_cache/
+# Gradle
+.gradle/
+
+# MyPy
 .mypy_cache/
-```
+
+# PyTest
+.pytest_cache/
