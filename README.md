@@ -1,330 +1,200 @@
-# 🎙 Vocal Remover Pro
+# 🎵 Vocal Remover Pro - الإصدار السحابي
 
-**فصل الأصوات عن الموسيقى باحترافية باستخدام الذكاء الاصطناعي**
+<div dir="rtl">
 
-واجهة ويب جميلة وسهلة الاستخدام لفصل الأصوات عن الموسيقى الخلفية. مثالي للموسيقيين، المنتجين، ومحبي الكاريوكي.
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+[![Python 3.8+](https://img.shields.io/badge/python-3.8+-blue.svg)](https://www.python.org/downloads/)
+[![Hugging Face Spaces](https://img.shields.io/badge/🤗-Hugging%20Face%20Spaces-blue)](https://huggingface.co/spaces)
 
-![الحالة](https://img.shields.io/badge/الحالة-مستقر-green)
-![الرخصة](https://img.shields.io/badge/الرخصة-MIT-blue)
-![Python](https://img.shields.io/badge/Python-3.10+-blue)
-![التقنية](https://img.shields.io/badge/FastAPI-PyTorch-red)
+**افصل الأصوات عن الموسيقى بدقة عالية باستخدام الذكاء الاصطناعي!**
 
----
-
-## ✨ المميزات الرئيسية
-
-- 🎯 **فصل دقيق**: فصل الأصوات عن الموسيقى باستخدام أحدث نماذج AI (Demucs)
-- ⚡ **معالجة سريعة**: دعم تسريع GPU مع CUDA لمعالجة أسرع بـ 10x
-- 📱 **يعمل على جميع الأجهزة**: كمبيوتر، موبايل، تابلت - أي متصفح
-- 🌐 **واجهة عربية وإنجليزية**: واجهة مستخدم كاملة باللغتين
-- 📊 **شريط تقدم مباشر**: تابع حالة المعالجة لحظة بلحظة
-- 🎵 **دعم صيغ متعددة**: MP3, WAV, FLAC, AAC, OGG
-- 🔗 **فصل من روابط**: حمل مباشرة من YouTube أو أي رابط صوتي
-- ❌ **زر إلغاء**: أوقف أي عملية في أي وقت
-- 🖥️ **تطبيق سطح مكتب**: متاح كـ .exe للويندوز
-- 📲 **تطبيق موبايل**: أضفه للشاشة الرئيسية واستخدمه كتطبيق أصلي
+تطبيق متقدم لفصل المسارات الصوتية (Vocals, Drums, Bass, Other) يعمل على أي جهاز من خلال المتصفح.
 
 ---
 
-## 📁 هيكل المشروع
+## ✨ الميزات الرئيسية
 
-```
-vocal-remover-pro/
-├── backend/
-│   ├── main.py        ← خادم FastAPI (جميع نقاط API)
-│   └── engine.py      ← محرك الفصل (PyTorch / Demucs)
-├── frontend/
-│   └── index.html     ← تطبيق صفحة واحدة كامل (سحب وإفلات، شريط تقدم، إعدادات)
-├── outputs/           ← يُنشأ تلقائياً عند أول تشغيل
-├── run.py             ← مشغل بنقرة واحدة
-├── build.py           ← حزمة كـ .exe
-├── requirements.txt   ← المتطلبات
-└── README.md          ← هذا الملف
-```
+- 🚀 **يعمل على السحابة**: لا حاجة لتثبيت أي شيء، افتح الرابط واستخدم مباشرة
+- 📱 **متجاوب**: يعمل على الموبايل، اللاب توب، والتابلت
+- 🛑 **زر إلغاء**: أوقف أي عملية في أي وقت
+- 🔄 **تحديثات تلقائية**: تحقق من وجود نسخ جديدة بضغطة زر
+- 🔍 **تشخيص ذكي**: تقرير JSON جاهز لحل المشاكل
+- 🎯 **دقة عالية**: يستخدم نموذج HT-Demucs الأحدث
+- 🌐 **دعم الروابط**: ارفع ملفات أو أدخل روابط URL مباشرة
 
 ---
 
 ## 🚀 البدء السريع
 
-### الطريقة 1: التشغيل المباشر (موصى به للتجربة)
+### خيار 1: استخدام النسخة السحابية (موصى به)
+
+1. افتح رابط Hugging Face Space:
+   ```
+   https://huggingface.co/spaces/YOUR_USERNAME/vocal-remover-pro
+   ```
+
+2. ارفع ملف صوتي أو أدخل رابط URL
+
+3. اضغط "ابدأ فصل الملف"
+
+4. حمّل الملفات المفصولة!
+
+### خيار 2: التشغيل المحلي (للمطورين)
 
 ```bash
-# 1. استنساخ المشروع
+# استنساخ المشروع
 git clone https://github.com/YOUR_USERNAME/vocal-remover-pro.git
 cd vocal-remover-pro
 
-# 2. تثبيت المتطلبات
-pip install -r requirements.txt
+# تثبيت المتطلبات
+pip install -r requirements_cloud.txt
 
-# 3. تشغيل التطبيق
-python run.py
-```
+# تشغيل التطبيق
+python app_cloud.py
 
-سيتم:
-- تشغيل الخادم على **http://127.0.0.1:7070**
-- فتح المتصفح تلقائياً
-- يمكنك الوصول لوثائق API على **http://127.0.0.1:7070/docs**
-
-### الطريقة 2: مع تسريع GPU (أسرع بـ 10x)
-
-```bash
-# لو عندك كارت شاشة NVIDIA
-pip install torch torchaudio --index-url https://download.pytorch.org/whl/cu118
-pip install -r requirements.txt
-python run.py
+# افتح المتصفح على:
+# http://localhost:7860
 ```
 
 ---
 
-## 📋 المتطلبات الأساسية
+## 📖 الوثائق الكاملة
 
-| الأداة | الإصدار | التثبيت |
-|--------|---------|---------|
-| Python | 3.10 أو أحدث | [python.org](https://python.org) |
-| ffmpeg | أي إصدار | [ffmpeg.org](https://ffmpeg.org) - أضفه للـ PATH |
-| CUDA (اختياري) | 11.8 / 12.x | لتسريع GPU |
-
-### تثبيت ffmpeg
-
-**Windows:**
-```bash
-winget install ffmpeg
-# أو حمل من: https://ffmpeg.org/download.html
-```
-
-**macOS:**
-```bash
-brew install ffmpeg
-```
-
-**Linux:**
-```bash
-sudo apt install ffmpeg  # Ubuntu/Debian
-sudo dnf install ffmpeg  # Fedora
-```
+| الدليل | الوصف |
+|--------|-------|
+| [🚀 دليل البدء السريع](QUICK_START.md) | ابدأ استخدام التطبيق في دقائق |
+| [☁️ دليل النشر](DEPLOYMENT_GUIDE.md) | انشر التطبيق على GitHub و Hugging Face |
+| [🔧 حل المشاكل](TROUBLESHOOTING_AR.md) | حلول للمشاكل الشائعة |
+| [📝 دليل المساهمين](CONTRIBUTING.md) | كيف تساهم في المشروع |
+| [📋 قائمة التحقق من الإصدار](RELEASE_CHECKLIST.md) | Checklist للإصدارات الجديدة |
+| [🤖 دليل تسليم AI](AI_HANDOFF_AR.md) | معلومات للذكاء الاصطناعي |
 
 ---
 
 ## 🎯 كيفية الاستخدام
 
-### استخدام الواجهة الرسومية
+### رفع ملف:
+1. اضغط على تبويب "📁 رفع ملف"
+2. اختر ملف صوتي من جهازك
+3. اضغط "🚀 ابدأ فصل الملف"
+4. انتظر اكتمال المعالجة
+5. حمّل الملفات المفصولة (Vocals, Drums, Bass, Other)
 
-1. افتح المتصفح على `http://127.0.0.1:7070`
-2. اسحب وأفلت ملف صوتي أو الصق رابط URL
-3. اضغط زر **"فصل"** لبدء المعالجة
-4. تابع شريط التقدم المباشر
-5. اضغط **"إلغاء"** في أي وقت لإيقاف العملية
-6. حمّل النتيجة (vocals فقط أو الموسيقى فقط أو الكل)
+### رابط URL:
+1. اضغط على تبويب "🔗 رابط URL"
+2. أدخل رابط مباشر لملف صوتي
+3. اضغط "🚀 ابدأ معالجة الرابط"
+4. حمّل النتيجة
 
-### استخدام API برمجياً
+### أدوات إضافية:
+- **🛑 إلغاء العملية**: أوقف أي عملية جارية
+- **🔄 التحقق من التحديثات**: تحقّق من وجود نسخة جديدة
+- **🔍 تقرير التشخيص**: احصل على بيانات تقنية للمشاكل
 
+---
+
+## 🏗️ البنية التقنية
+
+| المكون | التقنية |
+|--------|---------|
+| الواجهة | Gradio |
+| محرك الفصل | HT-Demucs |
+| السيرفر | Hugging Face Spaces (Docker) |
+| اللغة | Python 3.10+ |
+
+### هيكل المشروع:
+```
+vocal-remover-pro/
+├── app_cloud.py              # التطبيق الرئيسي (Gradio)
+├── requirements_cloud.txt    # المتطلبات
+├── Dockerfile               # إعداد السيرفر السحابي
+├── update_manifest.json     # ملف التحديثات
+├── README.md                # هذا الملف
+├── QUICK_START.md           # دليل البدء
+├── DEPLOYMENT_GUIDE.md      # دليل النشر
+├── .github/
+│   ├── ISSUE_TEMPLATE/      # قوالب المشاكل
+│   └── PULL_REQUEST_TEMPLATE.md
+└── ... (ملفات أخرى)
+```
+
+---
+
+## ⚙️ الإعدادات المتقدمة
+
+### تحديث رابط Manifest:
+في `app_cloud.py`، عدّل:
 ```python
-import requests
-import json
+MANIFEST_URL = "https://raw.githubusercontent.com/YOUR_USERNAME/vocal-remover-pro/main/update_manifest.json"
+```
 
-BASE = "http://127.0.0.1:7070"
-
-# 1. رفع ملف
-with open("song.mp3", "rb") as f:
-    r = requests.post(f"{BASE}/api/separate",
-                      files={"file": f},
-                      data={"config_json": json.dumps({"model_name": "htdemucs_ft"})})
-job_id = r.json()["job_id"]
-
-# 2. متابعة التقدم
-stream = requests.get(f"{BASE}/api/progress/{job_id}", stream=True)
-for line in stream.iter_lines():
-    if line.startswith(b"data:"):
-        event = json.loads(line[5:])
-        print(f"التقدم: {event}")
-        if event["type"] == "done":
-            break
-
-# 3. تحميل النتيجة
-r = requests.get(f"{BASE}/api/download/{job_id}")
-with open("vocals.wav", "wb") as f:
-    f.write(r.content)
-
-# 4. إلغاء عملية (في أي وقت)
-requests.delete(f"{BASE}/api/job/{job_id}")
+### تخصيص النموذج:
+لتغيير نموذج Demucs المستخدم، عدّل في `app_cloud.py`:
+```python
+model = get_model('htdemucs_ft')  # أو 'htdemucs', 'mdx_extra', etc.
 ```
 
 ---
 
-## 🔌 نقاط API المتاحة
+## 🆘 الدعم
 
-| الطريقة | النقطة | الوصف |
-|---------|--------|-------|
-| `POST` | `/api/separate` | رفع ملف → يرجع `job_id` |
-| `POST` | `/api/separate-url` | تحميل من رابط (YouTube) → `job_id` |
-| `GET` | `/api/progress/{id}` | **بث مباشر** - تقدم المعالجة |
-| `GET` | `/api/download/{id}` | تحميل الصوت المفصول |
-| `GET` | `/api/stems/{id}/{stem}` | تحميل مسار منفرد (vocals/drums/bass/other) |
-| `GET` | `/api/job/{id}` | حالة المهمة (JSON) |
-| `DELETE` | `/api/job/{id}` | **إلغاء + تنظيف** |
-| `POST` | `/api/cancel/{id}` | إلغاء مهمة جارية |
-| `GET` | `/api/config` | الحصول على الإعدادات الحالية |
-| `POST` | `/api/config` | حفظ الإعدادات |
-| `GET` | `/api/system` | معلومات النظام (GPU, RAM, ffmpeg) |
-
----
-
-## ⚙️ الإعدادات والتخصيص
-
-الإعدادات تُحفظ في `~/.vocal_remover_pro_config.json`.
-
-| المفتاح | الافتراضي | الوصف |
-|---------|----------|-------|
-| `model_name` | `htdemucs_ft` | نموذج AI: `htdemucs_ft` / `htdemucs` / `mdx` / `demucs` |
-| `segment` | `8.0` | طول الجزء بالثواني |
-| `overlap` | `1.0` | التداخل بين الأجزاء |
-| `shifts` | `3` | عدد التحولات الزمنية |
-| `output_format` | `wav` | الصيغة: `wav` / `mp3` / `flac` / `aac` / `ogg` |
-| `output_all_stems` | `false` | تصدير جميع المسارات منفصلة |
-| `device` | `auto` | الجهاز: `auto` / `cuda` / `cpu` |
-| `audio_bitrate` | `256k` | جودة الصيغ المضغوطة |
-| `adaptive_mode` | `true` | ضبط تلقائي حسب الجهاز |
-
----
-
-## 📱 الاستخدام على الموبايل (تطبيق ويب تقدمي)
-
-التطبيق يعمل كتطبيق ويب تقدمي (PWA) - لا يحتاج تثبيت!
-
-### على الشبكة المحلية:
-
-1. شغّل الخادم: `python run.py --host 0.0.0.0`
-2. اعرف عنوان IP المحلي لجهازك (مثلاً `192.168.1.100`)
-3. على الموبايل، افتح: `http://192.168.1.100:7070`
-4. **Android**: القائمة → "إضافة للشاشة الرئيسية"
-5. **iOS**: مشاركة سفاري → "إضافة للشاشة الرئيسية"
-
-الآن التطبيق يعمل كتطبيق أصلي على موبايلك! 📲
-
----
-
-## 🖥️ الحزمة كتطبيق سطح مكتب
-
-### ويندوز (.exe)
-
-```bash
-# تثبيت PyInstaller
-pip install pyinstaller
-
-# بناء التطبيق
-python build.py
-
-# أو استخدم ملف الدفعات
-build_exe.bat
-```
-
-**المخرج**: `dist/VocalRemoverPro/VocalRemoverPro.exe`
-
-> ⚠️ وزّع المجلد كاملاً (وليس فقط .exe) لأنه يحتوي على ملفات DLL المطلوبة.
-
-عند النقر المزدوج على `.exe`:
-- يبدأ خادم FastAPI في الخلفية
-- يفتح المتصفح تلقائياً
-
-### ماك (.app)
-
-```bash
-python build.py
-# لإضافة علم --windowed، عدّل build.py
-```
-
-### لينكس (AppImage)
-
-```bash
-pip install pyinstaller
-python build.py
-# ثم غلّف المجلد بـ appimagetool
-```
-
----
-
-## 🏭 النشر للإنتاج
-
-للحصول على أداء أفضل مع عدة مستخدمين:
-
-```bash
-# مع Nginx كـ reverse proxy (موصى به)
-uvicorn backend.main:app --host 0.0.0.0 --port 7070 --workers 1
-
-# أو مع gunicorn (لينكس/ماك)
-gunicorn backend.main:app -w 1 -k uvicorn.workers.UvicornWorker -b 0.0.0.0:7070
-```
-
-> **ملاحظة**: استخدم `--workers 1` - ذاكرة التخزين المؤقت للنموذج ليست آمنة للعمليات المتعددة بعد.
-
----
-
-## 🐛 حل المشاكل الشائعة
+### المشاكل الشائعة:
 
 | المشكلة | الحل |
 |---------|------|
-| `ffmpeg not found` | ثبّت ffmpeg وأضفه للـ PATH |
-| `CUDA out of memory` | قلّل `segment` إلى 4 ثواني أو استخدم نموذج `mdx` |
-| `yt-dlp not installed` | `pip install yt-dlp` |
-| تحميل النموذج بطيء | النماذج تُحمّل مرة واحدة من HuggingFace (~300MB) |
-| المنفذ مستخدم | `python run.py --port 8080` |
-| خطأ في الذاكرة | أغلق التطبيقات الأخرى أو استخدم `long_file_mode: chunk` |
+| العملية بطيئة | استخدم GPU Space (مدفوع) أو ملفات أصغر |
+| زر الإلغاء لا يعمل | راجع [TROUBLESHOOTING_AR.md](TROUBLESHOOTING_AR.md) |
+| لا يمكن رفع الملف | تحقّق من حجم الملف (< 100MB للنسخة المجانية) |
 
----
-
-## 📚 الأسئلة الشائعة
-
-### س: هل يعمل بدون إنترنت؟
-ج: نعم! بعد تحميل النماذج أول مرة، كل المعالجة تتم محلياً بدون إنترنت.
-
-### س: ما الفرق بين النماذج المختلفة؟
-ج: 
-- `htdemucs_ft`: الأفضل دقةً (موصى به)
-- `htdemucs`: سريع وجيد
-- `mdx`: متوازن
-- `demucs`: الأسرع لكن أقل دقة
-
-### س: كم يستغرق الفصل؟
-ج: يعتمد على:
-- طول الملف
-- قوة جهازك (GPU أسرع 10x)
-- إعدادات النموذج
-عادةً: دقيقة واحدة لكل دقيقة صوت على CPU، 6 ثواني على GPU.
-
-### س: هل يمكنني فصل أكثر من ملف؟
-ج: نعم! ارفع ملفات متعددة وستُعالج بالتتابع.
+### الحصول على المساعدة:
+1. اقرأ [دليل حل المشاكل](TROUBLESHOOTING_AR.md)
+2. ابحث في [Issues الموجودة](https://github.com/YOUR_USERNAME/vocal-remover-pro/issues)
+3. افتح [Issue جديد](https://github.com/YOUR_USERNAME/vocal-remover-pro/issues/new/choose)
+4. اسأل في [Discussions](https://github.com/YOUR_USERNAME/vocal-remover-pro/discussions)
 
 ---
 
 ## 🤝 المساهمة
 
-نرحب بالمساهمات! طالع الملفات التالية:
-- [دليل المساهمة](CONTRIBUTING.md)
-- [دليل المصدر المفتوح](OPEN_SOURCE_GUIDE_AR.md)
-- [دليل استكشاف الأخطاء](TROUBLESHOOTING_AR.md)
+نرحب بالمساهمات! اقرأ [دليل المساهمين](CONTRIBUTING.md) للبدء.
+
+### أنواع المساهمات المطلوبة:
+- 🐛 إصلاح أخطاء
+- ✨ ميزات جديدة
+- 📚 تحسين التوثيق
+- 🌐 ترجمة ل لغات أخرى
+- 🧪 اختبار على أجهزة مختلفة
 
 ---
 
-## 📄 الرخصة
+## 📜 الترخيص
 
-هذا المشروع مرخص تحت رخصة [MIT](LICENSE).
-
----
-
-## 🙏 شكر وتقدير
-
-- نموذج [Demucs](https://github.com/facebookresearch/demucs) من Meta Research
-- مكتبة [FastAPI](https://fastapi.tiangolo.com/)
-- مجتمع المصادر المفتوحة
+MIT License - راجع ملف [LICENSE](LICENSE) للتفاصيل.
 
 ---
 
-## 📬 التواصل
+## 🙏 شكر خاص
 
-- 📧 البريد: your-email@example.com
-- 💬 المشاكل: [GitHub Issues](https://github.com/YOUR_USERNAME/vocal-remover-pro/issues)
-- 🌟 إذا أعجبك المشروع، لا تنسى وضع نجمة ⭐
+- [Demucs](https://github.com/facebookresearch/demucs) من Facebook Research
+- [Gradio](https://gradio.app/) للواجهة الرائعة
+- [Hugging Face](https://huggingface.co/) للاستضافة السحابية
 
 ---
 
-**صُنع بحب ❤️ للمجتمع العربي والعالمي**
+## 📬 تواصل
+
+- **GitHub:** [@YOUR_USERNAME](https://github.com/YOUR_USERNAME)
+- **Hugging Face:** [YOUR_USERNAME](https://huggingface.co/YOUR_USERNAME)
+- **Email:** your.email@example.com
+
+---
+
+<div align="center">
+
+**⭐ إذا أعجبك المشروع، لا تنسَ تقييمه على GitHub! ⭐**
+
+Made with ❤️ by YOUR_USERNAME
+
+</div>
+
+</div>
