@@ -1,11 +1,11 @@
 blank_issues_enabled: true
 contact_links:
   - name: 📚 دليل البدء السريع
-    url: https://github.com/YOUR_USERNAME/vocal-remover-pro/blob/main/QUICK_START.md
+    url: https://github.com/lam3y35/vocal-remover-pro/blob/main/QUICK_START.md
     about: ابدأ من هنا لاستخدام التطبيق بسرعة
   - name: 🔧 دليل حل المشاكل
-    url: https://github.com/YOUR_USERNAME/vocal-remover-pro/blob/main/TROUBLESHOOTING_AR.md
+    url: https://github.com/lam3y35/vocal-remover-pro/blob/main/TROUBLESHOOTING_AR.md
     about: حلول للمشاكل الشائعة
   - name: 💬 نقاشات عامة
-    url: https://github.com/YOUR_USERNAME/vocal-remover-pro/discussions
+    url: https://github.com/lam3y35/vocal-remover-pro/discussions
     about: اطرح سؤالاً أو شارك أفكارك
