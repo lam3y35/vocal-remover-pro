@@ -1,14 +1,15 @@
 {
-  "version": "2.0.0",
+  "version": "2.1.0",
   "release_date": "2024-01-15",
-  "notes": "إضافة دعم السيرفر السحابي (Hugging Face Spaces)، تحسين سرعة الفصل، إضافة زر الإلغاء، ونظام التحديثات التلقائية.",
-  "download_url": "https://github.com/YOUR_USERNAME/YOUR_REPO/releases/download/v2.0.0/VocalRemoverPro_Windows.zip",
+  "notes": "تحديث كبير: تفعيل الإلغاء الحقيقي للعمليات، دعم تحميل URLs حقيقي من YouTube وSoundCloud ومئات المواقع عبر yt-dlp، تحسين شريط التقدم ليعكس الحالة الفعلية للمعالجة.",
+  "download_url": "https://github.com/YOUR_USERNAME/YOUR_REPO/releases/download/v2.1.0/VocalRemoverPro_Windows.zip",
   "mandatory": false,
   "min_python_version": "3.8",
   "features": [
     "فصل الأصوات باستخدام HT-Demucs",
     "دعم رفع الملفات وروابط URL",
-    "زر إلغاء العمليات",
+    "زر إلغاء حقيقي يوقف المعالجة فوراً",
+    "تحميل حقيقي من YouTube وSoundCloud وغيرها",
     "نظام تحديثات تلقائي",
     "تقرير تشخيصي مدمج",
     "واجهة تعمل على الموبايل واللاب"

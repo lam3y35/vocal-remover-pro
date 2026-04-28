@@ -9,14 +9,16 @@ import json
 import time
 from datetime import datetime
 import threading
+import requests
+import yt_dlp
 
 # إعدادات النسخة الحالية
-VERSION = "2.0.0"
+VERSION = "2.1.0"
 MANIFEST_URL = "https://raw.githubusercontent.com/YOUR_USERNAME/YOUR_REPO/main/update_manifest.json"
 
 # متغيرات عالمية للتحكم في العملية
-cancel_flag = False
-current_thread = None
+stop_event = threading.Event()
+current_process = None
 
 def load_model():
     """تحميل النموذج عند بدء التشغيل"""
@@ -30,10 +32,11 @@ def load_model():
 model, device = load_model()
 
 def separate_audio(input_file, progress=gr.Progress()):
-    """دالة فصل الأصوات مع دعم الإلغاء وشريط التقدم"""
-    global cancel_flag
+    """دالة فصل الأصوات مع دعم الإلغاء الحقيقي وشريط التقدم الدقيق"""
+    global stop_event
     
-    cancel_flag = False
+    # إعادة تعيين حدث الإيقاف
+    stop_event.clear()
     
     if input_file is None:
         return None, "يرجى رفع ملف صوتي أو إدخال رابط URL أولاً.", []
@@ -43,34 +46,51 @@ def separate_audio(input_file, progress=gr.Progress()):
         progress(0, desc="جاري التحميل والتحضير...")
         
         # التحقق من الإلغاء
-        if cancel_flag:
+        if stop_event.is_set():
             return None, "تم إلغاء العملية بواسطة المستخدم.", []
+        
+        # تحميل الملف الصوتي
+        from demucs.audio import load_audio
+        wav = load_audio(input_file)
         
         progress(0.1, desc="جاري معالجة الملف...")
         
-        # تطبيق النموذج
-        # ملاحظة: في التطبيق الحقيقي نحتاج لتحويل المسار إلى tensor
-        wav_path = input_file
+        if stop_event.is_set():
+            return None, "تم إلغاء العملية أثناء التحضير.", []
         
-        # محاكاة للتقدم (في الواقع Demucs يدعم progress callback)
+        # تطبيق النموذج مع callback للتقدم
         progress(0.3, desc="جاري فصل المسارات الصوتية...")
         
-        if cancel_flag:
-            return None, "تم إلغاء العملية أثناء الفصل.", []
+        def progress_callback(state):
+            """تحديث شريط التقدم بناءً على حالة Demucs"""
+            if stop_event.is_set():
+                raise InterruptedError("تم إلغاء العملية بواسطة المستخدم")
+            # حساب النسبة المئوية (0.3 إلى 0.8)
+            current_progress = 0.3 + (state * 0.5)
+            progress(current_progress, desc=f"جاري الفصل... {int(state*100)}%")
         
-        # تطبيق الفصل
-        sources = apply_model(model, wav_path, device=device, progress=True)
+        # تطبيق الفصل مع دعم الإلغاء
+        sources = apply_model(
+            model, 
+            wav, 
+            device=device, 
+            progress=True,
+            callback=progress_callback if callable(progress_callback) else None
+        )
+        
+        if stop_event.is_set():
+            return None, "تم إلغاء العملية قبل الحفظ.", []
         
         progress(0.8, desc="جاري حفظ الملفات المفصولة...")
-        
-        if cancel_flag:
-            return None, "تم إلغاء العملية قبل الحفظ.", []
         
         output_dir = tempfile.mkdtemp()
         stems = ['vocals', 'drums', 'bass', 'other']
         output_files = []
         
         for i, source in enumerate(sources[0]):
+            if stop_event.is_set():
+                return None, "تم إلغاء العملية أثناء الحفظ.", []
+                
             stem_name = stems[i]
             out_path = os.path.join(output_dir, f"{stem_name}.wav")
             save_audio(source, out_path, samplerate=44100)
@@ -81,13 +101,15 @@ def separate_audio(input_file, progress=gr.Progress()):
         
         return output_files, msg, output_files
 
+    except InterruptedError as e:
+        return None, str(e), []
     except Exception as e:
         return None, f"❌ حدث خطأ: {str(e)}", []
 
 def cancel_operation():
     """دالة إلغاء العملية"""
-    global cancel_flag
-    cancel_flag = True
+    global stop_event
+    stop_event.set()
     return "🛑 جاري إيقاف العملية...", []
 
 def check_for_updates():
@@ -115,40 +137,75 @@ def get_diagnostics():
         "timestamp": datetime.now().isoformat(),
         "status": "operational",
         "cancel_supported": True,
+        "url_download_supported": True,
         "model": "htdemucs"
     }
     return json.dumps(diag, indent=2, ensure_ascii=False)
 
-def process_url(url, progress=gr.Progress()):
-    """معالجة رابط URL (محاكاة)"""
-    global cancel_flag
-    cancel_flag = False
+def download_from_url(url, progress=gr.Progress()):
+    """تحميل ملف صوتي من URL باستخدام yt-dlp"""
+    global stop_event
+    
+    stop_event.clear()
     
     if not url:
         return None, "يرجى إدخال رابط URL صحيح.", []
     
     try:
-        progress(0, desc="جاري تحميل الملف من الرابط...")
+        progress(0, desc="جاري تجهيز التحميل...")
         
-        # هنا يتم إضافة كود تحميل الملف من URL
-        # هذا مثال مبسط
-        time.sleep(1)  # محاكاة للتحميل
+        # إعدادات yt-dlp
+        ydl_opts = {
+            'format': 'bestaudio/best',
+            'postprocessors': [{
+                'key': 'FFmpegExtractAudio',
+                'preferredcodec': 'wav',
+                'preferredquality': '192',
+            }],
+            'outtmpl': os.path.join(tempfile.gettempdir(), '%(title)s.%(ext)s'),
+            'quiet': True,
+            'no_warnings': True,
+        }
         
-        if cancel_flag:
-            return None, "تم إلغاء تحميل الملف.", []
+        progress(0.2, desc="جاري التحميل من الرابط...")
+        
+        with yt_dlp.YoutubeDL(ydl_opts) as ydl:
+            # الحصول على معلومات الفيديو
+            info = ydl.extract_info(url, download=False)
+            video_title = info.get('title', 'Unknown')
             
-        progress(0.5, desc="تم التحميل، جاري المعالجة...")
-        
-        # محاكاة للمعالجة
-        time.sleep(1)
-        
-        if cancel_flag:
-            return None, "تم إلغاء العملية.", []
+            if stop_event.is_set():
+                return None, "تم إلغاء التحميل.", []
             
-        return None, "✅ تم معالجة الرابط بنجاح (محاكاة). يرجى رفع ملف فعلي للتجربة الكاملة.", []
+            progress(0.4, desc=f"جاري تحميل: {video_title[:30]}...")
+            
+            # التحميل الفعلي
+            ydl.download([url])
+            
+            if stop_event.is_set():
+                return None, "تم إلغاء التحميل.", []
         
+        # البحث عن الملف المحمل
+        output_path = None
+        for file in os.listdir(tempfile.gettempdir()):
+            if file.endswith('.wav') and video_title[:20] in file:
+                output_path = os.path.join(tempfile.gettempdir(), file)
+                break
+        
+        if output_path and os.path.exists(output_path):
+            progress(0.8, desc="تم التحميل بنجاح، جاري المعالجة...")
+            # إعادة استخدام دالة الفصل
+            return separate_audio(output_path, progress)
+        else:
+            return None, "❌ فشل في العثور على الملف المحمل.", []
+            
     except Exception as e:
-        return None, f"❌ خطأ في المعالجة: {str(e)}", []
+        return None, f"❌ خطأ في التحميل: {str(e)}", []
+
+
+def process_url(url, progress=gr.Progress()):
+    """معالجة رابط URL (تحميل حقيقي الآن)"""
+    return download_from_url(url, progress)
 
 # بناء الواجهة
 with gr.Blocks(title="Vocal Remover Pro", theme=gr.themes.Soft()) as demo:
