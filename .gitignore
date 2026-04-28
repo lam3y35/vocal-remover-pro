@@ -1,1 +1,70 @@
-Nothing to output - the modified file is just README.md which is a source/config file and doesn't require any gitignore rules.
+# Logs
+*.log
+
+# Environment files
+.env
+.env.local
+*.env.*
+
+# Build artifacts
+*.pyc
+__pycache__/
+
+# Dependencies
+venv/
+.venv/
+env/
+
+# Distribution files
+dist/
+build/
+
+# Executables
+*.exe
+*.msi
+
+# Python cache
+*.pyc
+__pycache__/
+*.egg-info/
+*.eggs/
+
+# Temporary files
+*.tmp
+*.swp
+*.swo
+*~
+
+# Coverage reports
+.coverage
+coverage/
+htmlcov/
+
+# IDE files
+.vscode/
+.idea/
+*.swp
+*.sublime-workspace
+
+# System files
+.DS_Store
+Thumbs.db
+
+# Compressed files
+*.zip
+*.gz
+*.tar
+*.tgz
+*.bz2
+*.xz
+*.7z
+
+# Model cache
+models/
+*.bin
+*.safetensors
+*.pt
+
+# Output files
+outputs/
+temp/
