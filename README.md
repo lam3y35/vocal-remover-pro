@@ -335,15 +335,7 @@ ENV PYTORCH_CUDA_ALLOC_CONF=max_split_size_mb:512
 
 </div>
 
----
 
-<div align="center">
-
-### ❤️ هل أعجبك المشروع؟
-
-**⭐ قم بتقييم المشروع على GitHub لدعمنا! ⭐**
-
-[Rating Badge](https://img.shields.io/github/stars/YOUR_USERNAME/vocal-remover-pro?style=social)
 
 **شارك المشروع مع أصدقائك!**
 
@@ -351,10 +343,5 @@ ENV PYTORCH_CUDA_ALLOC_CONF=max_split_size_mb:512
 [Share on Facebook](https://www.facebook.com/sharer/sharer.php?u=https://github.com/YOUR_USERNAME/vocal-remover-pro)
 [Share on LinkedIn](https://www.linkedin.com/shareArticle?mini=true&url=https://github.com/YOUR_USERNAME/vocal-remover-pro)
 
----
-
-**Made with ❤️ by YOUR_USERNAME and contributors**
-
-[Contributors](https://github.com/YOUR_USERNAME/vocal-remover-pro/graphs/contributors)
 
 </div>
