@@ -1,5 +1,0 @@
-OpenBLAS WARNING - could not determine the L2 cache size on this system, assuming 256k
-
-⚠  Missing packages: torch (install with: pip install torch --index-url https://download.pytorch.org/whl/cpu), torchaudio (install with: pip install torchaudio --index-url https://download.pytorch.org/whl/cpu)
-   Run:  pip install -r requirements.txt
-
