@@ -1,0 +1,27 @@
+# ── Vocal Remover Pro — requirements.txt ──────────────────────
+# Install: pip install -r requirements.txt
+# For GPU (CUDA 11.8): pip install torch torchaudio --index-url https://download.pytorch.org/whl/cu118
+
+# API server
+fastapi>=0.110.0
+uvicorn[standard]>=0.29.0
+python-multipart>=0.0.9
+
+# Separation engine
+torch>=2.1.0
+torchaudio>=2.1.0
+numpy>=1.24.0
+soundfile>=0.12.1
+librosa>=0.10.0
+
+# System
+psutil>=5.9.0
+
+# Optional — YouTube/URL download
+yt-dlp>=2024.1.0
+
+# Optional — GPU temperature monitoring
+# pynvml>=11.5.0
+
+# Optional — PyInstaller (for .exe packaging)
+# pyinstaller>=6.5.0
