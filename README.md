@@ -5,8 +5,6 @@
 [![Hugging Face Spaces](https://img.shields.io/badge/🤗-Hugging%20Face%20Spaces-blue)](https://huggingface.co/spaces)
 [![GitHub stars](https://img.shields.io/github/stars/YOUR_USERNAME/vocal-remover-pro?style=social)](https://github.com/YOUR_USERNAME/vocal-remover-pro/stargazers)
 [![GitHub forks](https://img.shields.io/github/forks/YOUR_USERNAME/vocal-remover-pro?style=social)](https://github.com/YOUR_USERNAME/vocal-remover-pro/network/members)
-[![GitHub issues](https://img.shields.io/github/issues/YOUR_USERNAME/vocal-remover-pro)](https://github.com/YOUR_USERNAME/vocal-remover-pro/issues)
-[![Last Commit](https://img.shields.io/github/last-commit/YOUR_USERNAME/vocal-remover-pro)](https://github.com/YOUR_USERNAME/vocal-remover-pro/commits/main)
 
 <div align="center">
 
