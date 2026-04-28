@@ -3,8 +3,7 @@
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 [![Python 3.8+](https://img.shields.io/badge/python-3.8+-blue.svg)](https://www.python.org/downloads/)
 [![Hugging Face Spaces](https://img.shields.io/badge/🤗-Hugging%20Face%20Spaces-blue)](https://huggingface.co/spaces)
-[![GitHub stars](https://img.shields.io/github/stars/YOUR_USERNAME/vocal-remover-pro?style=social)](https://github.com/YOUR_USERNAME/vocal-remover-pro/stargazers)
-[![GitHub forks](https://img.shields.io/github/forks/YOUR_USERNAME/vocal-remover-pro?style=social)](https://github.com/YOUR_USERNAME/vocal-remover-pro/network/members)
+
 
 <div align="center">
 
