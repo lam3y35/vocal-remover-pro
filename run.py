@@ -20,12 +20,20 @@ BACKEND = ROOT / "backend" / "main.py"
 
 def check_deps():
     missing = []
-    for pkg in ["fastapi", "uvicorn", "torch", "torchaudio",
-                "soundfile", "librosa", "numpy", "psutil"]:
+    for pkg in ["fastapi", "uvicorn", "soundfile", "librosa", "numpy", "psutil"]:
         try:
             __import__(pkg)
         except ImportError:
             missing.append(pkg)
+    # Check torch and torchaudio separately with CPU-only fallback
+    try:
+        import torch
+    except ImportError:
+        missing.append("torch (install with: pip install torch --index-url https://download.pytorch.org/whl/cpu)")
+    try:
+        import torchaudio
+    except ImportError:
+        missing.append("torchaudio (install with: pip install torchaudio --index-url https://download.pytorch.org/whl/cpu)")
     if missing:
         print(f"\n⚠  Missing packages: {', '.join(missing)}")
         print("   Run:  pip install -r requirements.txt\n")

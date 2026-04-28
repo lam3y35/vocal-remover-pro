@@ -1,200 +1,200 @@
-# 🎙 Vocal Remover Pro
+# 🎵 Vocal Remover Pro - الإصدار السحابي
 
-Studio-grade vocal separation with a beautiful web UI.  
-Backend: **FastAPI + PyTorch (Demucs)** · Frontend: **HTML/CSS/JS (pure, no build step)**
+<div dir="rtl">
+
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+[![Python 3.8+](https://img.shields.io/badge/python-3.8+-blue.svg)](https://www.python.org/downloads/)
+[![Hugging Face Spaces](https://img.shields.io/badge/🤗-Hugging%20Face%20Spaces-blue)](https://huggingface.co/spaces)
+
+**افصل الأصوات عن الموسيقى بدقة عالية باستخدام الذكاء الاصطناعي!**
+
+تطبيق متقدم لفصل المسارات الصوتية (Vocals, Drums, Bass, Other) يعمل على أي جهاز من خلال المتصفح.
 
 ---
 
-## 📁 Project Structure
+## ✨ الميزات الرئيسية
 
+- 🚀 **يعمل على السحابة**: لا حاجة لتثبيت أي شيء، افتح الرابط واستخدم مباشرة
+- 📱 **متجاوب**: يعمل على الموبايل، اللاب توب، والتابلت
+- 🛑 **زر إلغاء**: أوقف أي عملية في أي وقت
+- 🔄 **تحديثات تلقائية**: تحقق من وجود نسخ جديدة بضغطة زر
+- 🔍 **تشخيص ذكي**: تقرير JSON جاهز لحل المشاكل
+- 🎯 **دقة عالية**: يستخدم نموذج HT-Demucs الأحدث
+- 🌐 **دعم الروابط**: ارفع ملفات أو أدخل روابط URL مباشرة
+
+---
+
+## 🚀 البدء السريع
+
+### خيار 1: استخدام النسخة السحابية (موصى به)
+
+1. افتح رابط Hugging Face Space:
+   ```
+   https://huggingface.co/spaces/YOUR_USERNAME/vocal-remover-pro
+   ```
+
+2. ارفع ملف صوتي أو أدخل رابط URL
+
+3. اضغط "ابدأ فصل الملف"
+
+4. حمّل الملفات المفصولة!
+
+### خيار 2: التشغيل المحلي (للمطورين)
+
+```bash
+# استنساخ المشروع
+git clone https://github.com/YOUR_USERNAME/vocal-remover-pro.git
+cd vocal-remover-pro
+
+# تثبيت المتطلبات
+pip install -r requirements_cloud.txt
+
+# تشغيل التطبيق
+python app_cloud.py
+
+# افتح المتصفح على:
+# http://localhost:7860
+```
+
+---
+
+## 📖 الوثائق الكاملة
+
+| الدليل | الوصف |
+|--------|-------|
+| [🚀 دليل البدء السريع](QUICK_START.md) | ابدأ استخدام التطبيق في دقائق |
+| [☁️ دليل النشر](DEPLOYMENT_GUIDE.md) | انشر التطبيق على GitHub و Hugging Face |
+| [🔧 حل المشاكل](TROUBLESHOOTING_AR.md) | حلول للمشاكل الشائعة |
+| [📝 دليل المساهمين](CONTRIBUTING.md) | كيف تساهم في المشروع |
+| [📋 قائمة التحقق من الإصدار](RELEASE_CHECKLIST.md) | Checklist للإصدارات الجديدة |
+| [🤖 دليل تسليم AI](AI_HANDOFF_AR.md) | معلومات للذكاء الاصطناعي |
+
+---
+
+## 🎯 كيفية الاستخدام
+
+### رفع ملف:
+1. اضغط على تبويب "📁 رفع ملف"
+2. اختر ملف صوتي من جهازك
+3. اضغط "🚀 ابدأ فصل الملف"
+4. انتظر اكتمال المعالجة
+5. حمّل الملفات المفصولة (Vocals, Drums, Bass, Other)
+
+### رابط URL:
+1. اضغط على تبويب "🔗 رابط URL"
+2. أدخل رابط مباشر لملف صوتي
+3. اضغط "🚀 ابدأ معالجة الرابط"
+4. حمّل النتيجة
+
+### أدوات إضافية:
+- **🛑 إلغاء العملية**: أوقف أي عملية جارية
+- **🔄 التحقق من التحديثات**: تحقّق من وجود نسخة جديدة
+- **🔍 تقرير التشخيص**: احصل على بيانات تقنية للمشاكل
+
+---
+
+## 🏗️ البنية التقنية
+
+| المكون | التقنية |
+|--------|---------|
+| الواجهة | Gradio |
+| محرك الفصل | HT-Demucs |
+| السيرفر | Hugging Face Spaces (Docker) |
+| اللغة | Python 3.10+ |
+
+### هيكل المشروع:
 ```
 vocal-remover-pro/
-├── backend/
-│   ├── main.py        ← FastAPI server (all API endpoints)
-│   └── engine.py      ← Separation engine (PyTorch / torchaudio)
-├── frontend/
-│   └── index.html     ← Full SPA (drag-drop, SSE progress, settings)
-├── outputs/           ← Created automatically on first run
-├── run.py             ← One-click launcher
-├── build.py           ← Package as .exe
-├── requirements.txt
-└── README.md
+├── app_cloud.py              # التطبيق الرئيسي (Gradio)
+├── requirements_cloud.txt    # المتطلبات
+├── Dockerfile               # إعداد السيرفر السحابي
+├── update_manifest.json     # ملف التحديثات
+├── README.md                # هذا الملف
+├── QUICK_START.md           # دليل البدء
+├── DEPLOYMENT_GUIDE.md      # دليل النشر
+├── .github/
+│   ├── ISSUE_TEMPLATE/      # قوالب المشاكل
+│   └── PULL_REQUEST_TEMPLATE.md
+└── ... (ملفات أخرى)
 ```
 
 ---
 
-## ⚡ Quick Start (Dev Mode)
+## ⚙️ الإعدادات المتقدمة
 
-### 1. Prerequisites
-
-| Tool | Version | Install |
-|------|---------|---------|
-| Python | ≥ 3.10 | python.org |
-| ffmpeg | any | ffmpeg.org → add to PATH |
-| CUDA (optional) | 11.8 / 12.x | For GPU acceleration |
-
-### 2. Install Python dependencies
-
-```bash
-# CPU-only (works anywhere)
-pip install -r requirements.txt
-
-# GPU (CUDA 11.8) — much faster
-pip install torch torchaudio --index-url https://download.pytorch.org/whl/cu118
-pip install -r requirements.txt
-```
-
-### 3. Run
-
-```bash
-python run.py
-```
-
-This will:
-- Start the FastAPI server on **http://127.0.0.1:7070**
-- Open your browser automatically
-- The API docs are at **http://127.0.0.1:7070/docs**
-
----
-
-## 🔌 API Endpoints
-
-| Method | Endpoint | Description |
-|--------|----------|-------------|
-| `POST` | `/api/separate` | Upload file → returns `job_id` |
-| `POST` | `/api/separate-url` | YouTube/URL download → `job_id` |
-| `GET`  | `/api/progress/{id}` | **SSE stream** — real-time progress |
-| `GET`  | `/api/download/{id}` | Download separated vocals |
-| `GET`  | `/api/stems/{id}/{stem}` | Download individual stem |
-| `GET`  | `/api/job/{id}` | Job status (JSON) |
-| `DELETE` | `/api/job/{id}` | Cancel + cleanup |
-| `POST` | `/api/cancel/{id}` | Cancel running job |
-| `GET`  | `/api/config` | Get current config |
-| `POST` | `/api/config` | Save config to disk |
-| `GET`  | `/api/system` | System info (GPU, RAM, ffmpeg) |
-| `GET`  | `/api/update/check` | Check update manifest + latest version |
-| `GET`  | `/api/diagnostics` | Export diagnostics payload for support/AI |
-
-### Example (Python client)
-
+### تحديث رابط Manifest:
+في `app_cloud.py`، عدّل:
 ```python
-import requests, sseclient, json
+MANIFEST_URL = "https://raw.githubusercontent.com/YOUR_USERNAME/vocal-remover-pro/main/update_manifest.json"
+```
 
-BASE = "http://127.0.0.1:7070"
-
-# 1. Upload
-with open("song.mp3", "rb") as f:
-    r = requests.post(f"{BASE}/api/separate",
-                      files={"file": f},
-                      data={"config_json": json.dumps({"model_name": "htdemucs_ft"})})
-job_id = r.json()["job_id"]
-
-# 2. Stream progress
-stream = requests.get(f"{BASE}/api/progress/{job_id}", stream=True)
-for line in stream.iter_lines():
-    if line.startswith(b"data:"):
-        ev = json.loads(line[5:])
-        print(ev)
-        if ev["type"] == "done":
-            break
-
-# 3. Download
-r = requests.get(f"{BASE}/api/download/{job_id}")
-with open("vocals.wav", "wb") as f:
-    f.write(r.content)
+### تخصيص النموذج:
+لتغيير نموذج Demucs المستخدم، عدّل في `app_cloud.py`:
+```python
+model = get_model('htdemucs_ft')  # أو 'htdemucs', 'mdx_extra', etc.
 ```
 
 ---
 
-## 🖥 Package as Desktop App (.exe / binary)
+## 🆘 الدعم
 
-### Windows `.exe`
+### المشاكل الشائعة:
 
-```bash
-# Install PyInstaller first
-pip install pyinstaller
+| المشكلة | الحل |
+|---------|------|
+| العملية بطيئة | استخدم GPU Space (مدفوع) أو ملفات أصغر |
+| زر الإلغاء لا يعمل | راجع [TROUBLESHOOTING_AR.md](TROUBLESHOOTING_AR.md) |
+| لا يمكن رفع الملف | تحقّق من حجم الملف (< 100MB للنسخة المجانية) |
 
-# Build
-python build.py
-```
-
-Output: `dist/VocalRemoverPro/VocalRemoverPro.exe`  
-**Distribute the whole folder** (not just the .exe) — it contains DLLs.
-
-Double-clicking the `.exe`:
-- Starts the FastAPI server silently
-- Opens the UI in your default browser automatically
-
-### macOS `.app`
-
-Same command — PyInstaller produces a macOS binary.  
-To wrap as `.app`, add `--windowed` flag in `build.py`.
-
-### Linux AppImage (optional)
-
-```bash
-pip install pyinstaller
-python build.py
-# Then wrap dist/ with appimagetool
-```
+### الحصول على المساعدة:
+1. اقرأ [دليل حل المشاكل](TROUBLESHOOTING_AR.md)
+2. ابحث في [Issues الموجودة](https://github.com/YOUR_USERNAME/vocal-remover-pro/issues)
+3. افتح [Issue جديد](https://github.com/YOUR_USERNAME/vocal-remover-pro/issues/new/choose)
+4. اسأل في [Discussions](https://github.com/YOUR_USERNAME/vocal-remover-pro/discussions)
 
 ---
 
-## 📱 Mobile App (Progressive Web App — PWA)
+## 🤝 المساهمة
 
-The frontend is PWA-ready. On a local network:
+نرحب بالمساهمات! اقرأ [دليل المساهمين](CONTRIBUTING.md) للبدء.
 
-1. Run the server with `python run.py --host 0.0.0.0`
-2. Find your PC's local IP (e.g. `192.168.1.100`)
-3. On Android/iOS, open `http://192.168.1.100:7070`
-4. **Android**: Menu → "Add to Home Screen" → works like a native app
-5. **iOS**: Safari Share → "Add to Home Screen"
-
-> For full offline PWA, add a `manifest.json` and `service-worker.js` (not required for local network use).
-
----
-
-## ⚙ Configuration
-
-Settings are saved to `~/.vocal_remover_pro_config.json`.
-
-| Key | Default | Description |
-|-----|---------|-------------|
-| `model_name` | `htdemucs_ft` | `htdemucs_ft` / `htdemucs` / `mdx` / `demucs` |
-| `segment` | `8.0` | Chunk length in seconds |
-| `overlap` | `1.0` | Overlap between chunks |
-| `shifts` | `3` | Time-shift ensemble count |
-| `output_format` | `wav` | `wav` / `mp3` / `flac` / `aac` / `ogg` |
-| `output_all_stems` | `false` | Export drums/bass/other/vocals separately |
-| `device` | `auto` | `auto` / `cuda` / `cpu` |
-| `audio_bitrate` | `256k` | For lossy formats |
-| `adaptive_mode` | `true` | Auto tune settings by hardware/file size |
-| `long_file_mode` | `auto` | `auto` / `chunk` / `direct` |
-| `chunk_minutes` | `10` | Chunk size for long processing |
-| `update_manifest_url` | `""` | JSON URL for upgrade checks |
+### أنواع المساهمات المطلوبة:
+- 🐛 إصلاح أخطاء
+- ✨ ميزات جديدة
+- 📚 تحسين التوثيق
+- 🌐 ترجمة ل لغات أخرى
+- 🧪 اختبار على أجهزة مختلفة
 
 ---
 
-## 🚀 Production Deployment
+## 📜 الترخيص
 
-```bash
-# With Nginx as reverse proxy (recommended)
-uvicorn backend.main:app --host 0.0.0.0 --port 7070 --workers 1
-
-# Or with gunicorn (Linux/macOS)
-gunicorn backend.main:app -w 1 -k uvicorn.workers.UvicornWorker -b 0.0.0.0:7070
-```
-
-> **Note**: Use `--workers 1` — the model cache is not yet multi-process safe.
+MIT License - راجع ملف [LICENSE](LICENSE) للتفاصيل.
 
 ---
 
-## 🐛 Troubleshooting
+## 🙏 شكر خاص
 
-| Problem | Fix |
-|---------|-----|
-| `ffmpeg not found` | Install ffmpeg and add to PATH. Windows: `winget install ffmpeg` |
-| `CUDA out of memory` | Reduce `segment` to 4s, or switch to `mdx` model |
-| `yt-dlp not installed` | `pip install yt-dlp` |
-| Model download slow | Models download once from HuggingFace (~300MB each) |
-| Port in use | `python run.py --port 8080` |
+- [Demucs](https://github.com/facebookresearch/demucs) من Facebook Research
+- [Gradio](https://gradio.app/) للواجهة الرائعة
+- [Hugging Face](https://huggingface.co/) للاستضافة السحابية
+
+---
+
+## 📬 تواصل
+
+- **GitHub:** [@YOUR_USERNAME](https://github.com/YOUR_USERNAME)
+- **Hugging Face:** [YOUR_USERNAME](https://huggingface.co/YOUR_USERNAME)
+- **Email:** your.email@example.com
+
+---
+
+<div align="center">
+
+**⭐ إذا أعجبك المشروع، لا تنسَ تقييمه على GitHub! ⭐**
+
+Made with ❤️ by YOUR_USERNAME
+
+</div>
+
+</div>
