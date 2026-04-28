@@ -1,0 +1,24 @@
+# ── Vocal Remover Pro — requirements_cloud.txt ──────────────────────
+# متطلبات النسخة السحابية لـ Hugging Face Spaces
+
+# Gradio للواجهة
+gradio>=4.0.0
+
+# PyTorch ومكتبات الصوت
+torch>=2.1.0
+torchaudio>=2.1.0
+
+# Demucs - محرك فصل الأصوات
+demucs>=4.0.1
+
+# معالجة الملفات والصوت
+numpy>=1.24.0
+soundfile>=0.12.1
+librosa>=0.10.0
+
+# تنزيل الروابط
+yt-dlp>=2024.1.0
+requests>=2.31.0
+
+# أدوات مساعدة
+python-multipart>=0.0.9
