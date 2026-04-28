@@ -41,6 +41,7 @@ OUTPUTS_DIR.mkdir(exist_ok=True)
 
 CONFIG_PATH = Path.home() / ".vocal_remover_pro_config.json"
 JOBS: Dict[str, Dict[str, Any]] = {}  # job_id -> job info
+JOB_STOP_EVENTS: Dict[str, threading.Event] = {}  # job_id -> stop event for cancellation
 MODEL_CACHE = None
 
 # Default config
@@ -113,42 +114,90 @@ def update_job(job_id: str, **kwargs):
         JOBS[job_id].update(kwargs)
 
 
+def get_stop_event(job_id: str) -> threading.Event:
+    """Get or create a stop event for a job."""
+    if job_id not in JOB_STOP_EVENTS:
+        JOB_STOP_EVENTS[job_id] = threading.Event()
+    return JOB_STOP_EVENTS[job_id]
+
+
+def cancel_job_execution(job_id: str):
+    """Signal a job to stop by setting its stop event."""
+    if job_id in JOB_STOP_EVENTS:
+        JOB_STOP_EVENTS[job_id].set()
+
+
 async def run_separation_engine(job_id: str, file_path: Optional[Path] = None, url: Optional[str] = None):
-    """Run the actual separation process (placeholder - integrates with engine.py)."""
+    """Run the actual separation process (integrates with engine.py)."""
     job = get_job(job_id)
     if not job:
         return
     
+    # Get the stop event for this job
+    stop_event = get_stop_event(job_id)
+    
     try:
         update_job(job_id, status="running", message="Loading model...")
         
-        # Simulate separation process (replace with actual engine call)
-        # In production, this would call engine.py's separate function
-        await asyncio.sleep(0.5)
+        # Import the engine
+        from backend.engine import SeparationEngine
+        
+        config = job["config"]
+        engine = SeparationEngine(config)
+        
+        # Load model
+        await asyncio.get_event_loop().run_in_executor(None, engine.load_model)
+        
         update_job(job_id, progress=20, message="Processing audio...")
         
-        await asyncio.sleep(0.5)
-        update_job(job_id, progress=50, message="Separating vocals...")
+        # Check for cancellation
+        if stop_event.is_set():
+            raise asyncio.CancelledError("Operation cancelled by user")
         
-        await asyncio.sleep(0.5)
-        update_job(job_id, progress=80, message="Generating output files...")
+        # Define progress callback
+        async def progress_callback(progress: int, message: str):
+            if not stop_event.is_set():
+                update_job(job_id, progress=progress, message=message)
         
-        await asyncio.sleep(0.3)
-        
-        # Create dummy output files for demonstration
+        # Determine output directory
         output_dir = OUTPUTS_DIR / job_id
-        output_dir.mkdir(exist_ok=True)
         
-        vocals_path = output_dir / "vocals.wav"
-        instrumental_path = output_dir / "instrumental.wav"
-        
-        # If we have an input file, copy it as placeholder; otherwise create empty
-        if file_path and file_path.exists():
-            shutil.copy(file_path, vocals_path)
-            shutil.copy(file_path, instrumental_path)
+        # Run separation
+        if file_path:
+            output_files = await engine.separate(
+                file_path, 
+                output_dir, 
+                progress_callback,
+                stop_event
+            )
+        elif url:
+            # URL processing - download first
+            update_job(job_id, progress=10, message="Downloading from URL...")
+            
+            from backend.url_downloader import download_audio_async
+            
+            download_dir = output_dir / "download"
+            downloaded_file, error = await download_audio_async(
+                url, 
+                download_dir,
+                progress_callback
+            )
+            
+            if error:
+                raise RuntimeError(error)
+            
+            if stop_event.is_set():
+                raise asyncio.CancelledError("Operation cancelled by user")
+            
+            # Now separate the downloaded file
+            output_files = await engine.separate(
+                downloaded_file, 
+                output_dir, 
+                progress_callback,
+                stop_event
+            )
         else:
-            vocals_path.touch()
-            instrumental_path.touch()
+            raise ValueError("No file or URL provided")
         
         update_job(
             job_id,
@@ -156,9 +205,16 @@ async def run_separation_engine(job_id: str, file_path: Optional[Path] = None, u
             progress=100,
             message="Done!",
             completed_at=datetime.now().isoformat(),
-            output_files=[str(vocals_path), str(instrumental_path)],
+            output_files=[str(f) for f in output_files],
         )
         
+    except asyncio.CancelledError:
+        update_job(
+            job_id,
+            status="cancelled",
+            message="Cancelled by user",
+            completed_at=datetime.now().isoformat(),
+        )
     except Exception as e:
         update_job(
             job_id,
@@ -271,10 +327,15 @@ async def cancel_job(job_id: str):
     if not job:
         raise HTTPException(status_code=404, detail="Job not found")
     
+    # Signal the job to stop (true cancellation)
+    cancel_job_execution(job_id)
+    
     if job["status"] in ["completed", "failed", "cancelled"]:
         # Just cleanup, don't change status
         pass
     else:
+        # Give it a moment to process the cancellation
+        await asyncio.sleep(0.5)
         update_job(job_id, status="cancelled", message="Cancelled by user")
     
     # Cleanup files

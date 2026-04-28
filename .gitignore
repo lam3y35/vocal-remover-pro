@@ -1,70 +1,75 @@
-# Logs
-*.log
-
-# Environment files
-.env
-.env.local
-*.env.*
-
-# Build artifacts
-*.pyc
+```
+# Python
 __pycache__/
-
-# Dependencies
+*.pyc
+*.pyo
+*.pyd
+.Python
+env/
 venv/
 .venv/
-env/
+.ENV
+.ENV.local
+.env
+.env.local
+.env.*
+.venv/
+venv/
+ENV/
+ENV.local
+.env.dSYM/
 
-# Distribution files
-dist/
-build/
-
-# Executables
-*.exe
-*.msi
-
-# Python cache
-*.pyc
-__pycache__/
-*.egg-info/
-*.eggs/
+# Logs
+*.log
 
 # Temporary files
 *.tmp
 *.swp
 *.swo
-*~
 
 # Coverage reports
-.coverage
 coverage/
 htmlcov/
+.coverage
 
-# IDE files
+# MyPy cache
+.mypy_cache/
+.dmypy.json
+dmypy.json
+
+# Pytest cache
+.pytest_cache/
+
+# Distribution / packaging
+.Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+
+# IDE
 .vscode/
 .idea/
 *.swp
-*.sublime-workspace
+*.swo
 
-# System files
+# OS generated files
 .DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
 Thumbs.db
-
-# Compressed files
-*.zip
-*.gz
-*.tar
-*.tgz
-*.bz2
-*.xz
-*.7z
-
-# Model cache
-models/
-*.bin
-*.safetensors
-*.pt
-
-# Output files
-outputs/
-temp/
+```

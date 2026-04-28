@@ -6,6 +6,7 @@ Handles actual audio separation processing.
 
 import os
 import sys
+import threading
 from pathlib import Path
 from typing import Optional, Dict, Any, List
 import asyncio
@@ -42,6 +43,15 @@ class SeparationEngine:
         self.config = config
         self.model = None
         self.device = self._get_device()
+        self.stop_event = threading.Event()  # For true cancellation
+        
+    def set_stop_event(self, stop_event: threading.Event):
+        """Set the stop event for cancellation."""
+        self.stop_event = stop_event
+        
+    def check_cancelled(self) -> bool:
+        """Check if the process has been cancelled."""
+        return self.stop_event.is_set()
         
     def _get_device(self) -> str:
         """Determine the best device (cuda/cpu)."""
@@ -76,6 +86,7 @@ class SeparationEngine:
         input_path: Path,
         output_dir: Path,
         progress_callback=None,
+        stop_event: threading.Event = None,
     ) -> List[Path]:
         """
         Separate audio file into stems.
@@ -84,6 +95,7 @@ class SeparationEngine:
             input_path: Path to input audio file
             output_dir: Directory to save output files
             progress_callback: Optional callback for progress updates
+            stop_event: Threading event for cancellation
             
         Returns:
             List of paths to output files
@@ -91,8 +103,16 @@ class SeparationEngine:
         if not self.model:
             self.load_model()
         
+        # Set stop event if provided
+        if stop_event:
+            self.set_stop_event(stop_event)
+        
         if progress_callback:
             await progress_callback(10, "Loading audio...")
+        
+        # Check for cancellation
+        if self.check_cancelled():
+            raise asyncio.CancelledError("Operation cancelled by user")
         
         # Load audio
         try:
@@ -111,6 +131,10 @@ class SeparationEngine:
         if progress_callback:
             await progress_callback(20, "Preparing model...")
         
+        # Check for cancellation
+        if self.check_cancelled():
+            raise asyncio.CancelledError("Operation cancelled by user")
+        
         # Get model parameters
         segment = self.config.get('segment', 8.0)
         overlap = self.config.get('overlap', 1.0)
@@ -119,6 +143,10 @@ class SeparationEngine:
         # Apply model
         if progress_callback:
             await progress_callback(30, "Running separation...")
+        
+        # Check for cancellation
+        if self.check_cancelled():
+            raise asyncio.CancelledError("Operation cancelled by user")
         
         try:
             with torch.no_grad():
@@ -143,6 +171,10 @@ class SeparationEngine:
         if progress_callback:
             await progress_callback(70, "Saving output files...")
         
+        # Check for cancellation
+        if self.check_cancelled():
+            raise asyncio.CancelledError("Operation cancelled by user")
+        
         # Save output files
         output_dir.mkdir(parents=True, exist_ok=True)
         output_files = []
@@ -151,6 +183,10 @@ class SeparationEngine:
         output_format = self.config.get('output_format', 'wav')
         
         for i, source in enumerate(sources):
+            # Check for cancellation during saving
+            if self.check_cancelled():
+                raise asyncio.CancelledError("Operation cancelled by user")
+            
             stem_name = stem_names[i] if i < len(stem_names) else f'stem_{i}'
             output_path = output_dir / f"{stem_name}.{output_format}"
             
@@ -167,6 +203,9 @@ class SeparationEngine:
         
         # Create combined instrumental if requested
         if len(sources) > 1:
+            if self.check_cancelled():
+                raise asyncio.CancelledError("Operation cancelled by user")
+            
             instrumental = sources[1:].sum(dim=0)
             instrumental_path = output_dir / f"instrumental.{output_format}"
             
@@ -196,6 +235,7 @@ async def separate_file(
     output_dir: Path,
     config: Dict[str, Any],
     progress_callback=None,
+    stop_event: threading.Event = None,
 ) -> List[Path]:
     """
     Convenience function to separate a file.
@@ -205,12 +245,13 @@ async def separate_file(
         output_dir: Directory to save output files
         config: Configuration dictionary
         progress_callback: Optional async callback for progress
+        stop_event: Threading event for cancellation
         
     Returns:
         List of output file paths
     """
     engine = SeparationEngine(config)
-    return await engine.separate(input_path, output_dir, progress_callback)
+    return await engine.separate(input_path, output_dir, progress_callback, stop_event)
 
 
 if __name__ == "__main__":
