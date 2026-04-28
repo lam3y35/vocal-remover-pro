@@ -87,33 +87,6 @@ vocal-remover-pro/
 
 ---
 
-## 🚀 الخطوات التالية (لك)
-
-### 1. إنشاء مستودع GitHub
-```bash
-cd /workspace
-git init
-git add .
-git commit -m "Initial commit: Cloud-ready vocal remover v2.0.0"
-git branch -M main
-git remote add origin https://github.com/YOUR_USERNAME/vocal-remover-pro.git
-git push -u origin main
-```
-
-### 2. إنشاء Hugging Face Space
-1. اذهب إلى: https://huggingface.co/spaces/new
-2. الاسم: `vocal-remover-pro`
-3. SDK: **Docker**
-4. اربط بمستودع GitHub
-5. انتظر 5-10 دقائق للبناء
-
-### 3. تحديث الروابط
-في الملفات التالية، استبدل `YOUR_USERNAME`:
-- `app_cloud.py`
-- `update_manifest.json`
-- `README.md`
-- `.github/ISSUE_TEMPLATE/config.yml`
-- `AI_HANDOFF_AR.md`
 
 ---
 
