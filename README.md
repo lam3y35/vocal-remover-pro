@@ -40,7 +40,7 @@
 
 1. **افتح التطبيق:**
    ```
-   https://huggingface.co/spaces/YOUR_USERNAME/vocal-remover-pro
+   https://huggingface.co/spaces/lam3y3500/vocal-remover-pro
    ```
 
 2. **ارفع ملفك** أو أدخل رابط URL
@@ -53,7 +53,7 @@
 
 ```bash
 # 1. استنساخ المشروع
-git clone https://github.com/YOUR_USERNAME/vocal-remover-pro.git
+git clone https://github.com/lam3y35/vocal-remover-pro.git
 cd vocal-remover-pro
 
 # 2. تثبيت المتطلبات (يتطلب Python 3.8+)
@@ -66,30 +66,7 @@ python app_cloud.py
 # http://localhost:7860
 ```
 
-### خيار 3: نشر نسختك الخاصة على Hugging Face
 
-```bash
-# اتبع الخطوات في دليل النشر
-# سيستغرق 5 دقائق فقط!
-```
-
-📖 **اقرأ:** [دليل النشر الكامل →](DEPLOYMENT_GUIDE.md)
-
----
-
-## 📖 الوثائق الكاملة
-
-| الدليل | الوصف | لمن هذا الدليل؟ |
-|--------|-------|----------------|
-| [🚀 دليل البدء السريع](QUICK_START.md) | ابدأ استخدام التطبيق في 3 دقائق | المستخدمين الجدد |
-| [☁️ دليل النشر](DEPLOYMENT_GUIDE.md) | انشر التطبيق على GitHub و Hugging Face خطوة بخطوة | المطورين |
-| [🔧 حل المشاكل](TROUBLESHOOTING_AR.md) | حلول مفصلة للمشاكل الشائعة | الجميع |
-| [📝 دليل المساهمين](CONTRIBUTING.md) | كيف تساهم في المشروع | المساهمين المحتملين |
-| [📋 قائمة التحقق من الإصدار](RELEASE_CHECKLIST.md) | Checklist احترافي للإصدارات | المُصيّنين |
-| [🤖 دليل تسليم AI](AI_HANDOFF_AR.md) | معلومات تقنية للذكاء الاصطناعي | المطورين وAI bots |
-| [📦 ملخص المشروع](PROJECT_SUMMARY.md) | نظرة عامة شاملة على المشروع | الجميع |
-
----
 
 ## 🎯 كيفية استخدام التطبيق
 
@@ -233,12 +210,6 @@ ENV PYTORCH_CUDA_ALLOC_CONF=max_split_size_mb:512
 
 | **Email** | moazelamey28@gmail.com |
 
----
-**شارك المشروع مع أصدقائك!**
-
-[Share on Twitter](https://twitter.com/intent/tweet?text=Check%20out%20this%20amazing%20AI%20vocal%20remover!&url=https://github.com/YOUR_USERNAME/vocal-remover-pro)
-[Share on Facebook](https://www.facebook.com/sharer/sharer.php?u=https://github.com/YOUR_USERNAME/vocal-remover-pro)
-[Share on LinkedIn](https://www.linkedin.com/shareArticle?mini=true&url=https://github.com/YOUR_USERNAME/vocal-remover-pro)
 
 
 </div>
