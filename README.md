@@ -136,53 +136,6 @@ python app_cloud.py
 | اللغة | Python | 3.10+ |
 | الحاوية | Docker | Latest |
 
-### هيكل المشروع
-
-```
-vocal-remover-pro/
-├── 📄 app_cloud.py              # التطبيق الرئيسي (Gradio)
-├── 📄 requirements_cloud.txt    # المكتبات المطلوبة
-├── 🐳 Dockerfile                # إعداد السيرفر السحابي
-├── 📄 update_manifest.json      # نظام التحديثات التلقائية
-├── 📄 README.md                 # هذا الملف
-│
-├── 📚 الوثائق:
-│   ├── QUICK_START.md           # دليل البدء السريع
-│   ├── DEPLOYMENT_GUIDE.md      # دليل النشر التفصيلي
-│   ├── TROUBLESHOOTING_AR.md    # حل المشاكل
-│   ├── CONTRIBUTING.md          # دليل المساهمين
-│   ├── RELEASE_CHECKLIST.md     # قائمة التحقق
-│   ├── AI_HANDOFF_AR.md         # دليل تسليم AI
-│   └── PROJECT_SUMMARY.md       # ملخص المشروع
-│
-├── ⚙️ ملفات GitHub:
-│   └── .github/
-│       ├── ISSUE_TEMPLATE/      # قوالب الإبلاغ
-│       │   ├── bug_report.md
-│       │   └── feature_request.md
-│       ├── PULL_REQUEST_TEMPLATE.md
-│       └── FUNDING.yml
-│
-└── 📂 ملفات إضافية:
-    ├── run.py                   # مشغّل محلي
-    ├── build.py                 # أداة البناء
-    └── outputs/                 # مجلد المخرجات
-```
-
----
-
-## ⚙️ الإعدادات المتقدمة
-
-### تخصيص رابط التحديثات
-
-في `app_cloud.py`، عدّل السطر التالي:
-
-```python
-MANIFEST_URL = "https://raw.githubusercontent.com/YOUR_USERNAME/vocal-remover-pro/main/update_manifest.json"
-```
-
-استبدل `YOUR_USERNAME` باسم المستخدم الخاص بك على GitHub.
-
 ### تغيير نموذج الذكاء الاصطناعي
 
 لتغيير نموذج Demucs المستخدم (للتجربة أو تحسين الأداء):
@@ -219,14 +172,6 @@ ENV PYTORCH_CUDA_ALLOC_CONF=max_split_size_mb:512
 | 📁 فشل رفع الملف | حجم > 100MB (للنسخة المجانية) | استخدم ملف أصغر أو ترقي لمساحة مدفوعة |
 | 🔗 رابط URL لا يعمل | الرابط غير مباشر أو محمي | استخدم رابط مباشر بدون حماية |
 | 🔄 التحديثات لا تظهر | خطأ في رابط Manifest | تحقّق من صحة الرابط في `app_cloud.py` |
-
-### الحصول على المساعدة
-
-1. **اقرأ أولاً:** [دليل حل المشاكل الشاملة](TROUBLESHOOTING_AR.md)
-2. **ابحث:** [في المشاكل الموجودة](https://github.com/YOUR_USERNAME/vocal-remover-pro/issues?q=is%3Aissue)
-3. **اسأل المجتمع:** [في قسم النقاشات](https://github.com/YOUR_USERNAME/vocal-remover-pro/discussions)
-4. **ابلغ عن مشكلة جديدة:** [افتح Issue جديد](https://github.com/YOUR_USERNAME/vocal-remover-pro/issues/new/choose)
-5. **للطوارئ:** استخدم زر **"🔍 تقرير التشخيص"** في التطبيق وأرفقه مع البلاغ
 
 ### قالب الإبلاغ عن مشكلة
 
@@ -268,15 +213,6 @@ ENV PYTORCH_CUDA_ALLOC_CONF=max_split_size_mb:512
 | 🧪 **اختبار** | اختبار على أجهزة ومتصفحات مختلفة | سهلة |
 | 🎨 **تحسين UI/UX** | تحسين التصميم وتجربة المستخدم | متوسطة |
 
-### كيف تبدأ؟
-
-1. اقرأ [دليل المساهمين الكامل](CONTRIBUTING.md)
-2. ابحث عن [Issues مفتوحة](https://github.com/YOUR_USERNAME/vocal-remover-pro/issues?q=is%3Aopen+is%3Aissue+label%3A%22good+first+issue%22) مناسبة للمبتدئين
-3. Fork المشروع وأنشئ فرع جديد
-4. قدّم Pull Request مع وصف واضح للتغييرات
-
----
-
 ## 📜 الترخيص
 
 **MIT License** - حر ومفتوح المصدر
@@ -310,31 +246,10 @@ ENV PYTORCH_CUDA_ALLOC_CONF=max_split_size_mb:512
 ## 📬 تواصل معنا
 
 | المنصة | الرابط |
-|--------|--------|
-| **GitHub** | [@YOUR_USERNAME](https://github.com/YOUR_USERNAME) |
-| **Hugging Face** | [YOUR_USERNAME](https://huggingface.co/YOUR_USERNAME) |
-| **Email** | your.email@example.com |
-| **Twitter** | @YOUR_USERNAME (اختياري) |
-| **Discord** | [رابط السيرفر] (اختياري) |
+
+| **Email** | moazelamey28@gmail.com |
 
 ---
-
-## 📈 إحصائيات المشروع
-
-<div align="center">
-
-![GitHub Stars](https://img.shields.io/github/stars/YOUR_USERNAME/vocal-remover-pro?style=social)
-![GitHub Forks](https://img.shields.io/github/forks/YOUR_USERNAME/vocal-remover-pro?style=social)
-![GitHub Issues](https://img.shields.io/github/issues/YOUR_USERNAME/vocal-remover-pro)
-![GitHub Pull Requests](https://img.shields.io/github/issues-pr/YOUR_USERNAME/vocal-remover-pro)
-![GitHub Contributors](https://img.shields.io/github/contributors/YOUR_USERNAME/vocal-remover-pro)
-![Last Commit](https://img.shields.io/github/last-commit/YOUR_USERNAME/vocal-remover-pro)
-![License](https://img.shields.io/github/license/YOUR_USERNAME/vocal-remover-pro)
-
-</div>
-
-
-
 **شارك المشروع مع أصدقائك!**
 
 [Share on Twitter](https://twitter.com/intent/tweet?text=Check%20out%20this%20amazing%20AI%20vocal%20remover!&url=https://github.com/YOUR_USERNAME/vocal-remover-pro)
