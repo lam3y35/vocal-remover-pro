@@ -36,44 +36,7 @@
 ✅ **دعم URL:** معالجة الروابط المباشرة (قيد التطوير)  
 ✅ **واجهة متجاوبة:** تعمل على الموبايل واللاب  
 
-## المشاكل المعروفة والحلول المقترحة
-
-### 1. الإلغاء الفعلي (True Cancellation)
-**المشكلة:** زر الإلغاء يغير الحالة لكن العملية قد تستمر في الخلفية.  
-**الحل المقترح:** استخدام `threading.Event()` أو `concurrent.futures` مع timeout.
-
-```python
-import threading
-stop_event = threading.Event()
-
-def separate_audio(...):
-    for step in processing_steps:
-        if stop_event.is_set():
-            return "تم الإلغاء"
-        # متابعة المعالجة
-```
-
-### 2. الملفات الكبيرة جداً (ساعتين+)
-**المشكلة:** الوقت الطويل للملفات الكبيرة.  
-**الحل المقترح:** 
-- تقسيم الملف إلى أجزاء (chunking)
-- معالجة متوازية (parallel processing)
-- استخدام GPU مخصص على Hugging Face Pro
-
-### 3. تحميل الملفات من URL
-**المشكلة:** الكود الحالي يحاكي التحميل فقط.  
-**الحل المقترح:** إضافة مكتبة `yt-dlp` أو `requests` لتحميل فعلي.
-
-```python
-import yt_dlp
-
-def download_from_url(url):
-    ydl_opts = {'format': 'bestaudio'}
-    with yt_dlp.YoutubeDL(ydl_opts) as ydl:
-        info = ydl.extract_info(url, download=False)
-        # تحميل الملف
-```
-
+## 
 ## المطلوب من الذكاء الاصطناعي التالي
 
 ### الأولويات القصوى
