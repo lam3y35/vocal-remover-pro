@@ -71,13 +71,6 @@ python app_cloud.py
 
 ---
 
-## روابط مهمة:
 
-- **المستودع:** https://github.com/YOUR_USERNAME/vocal-remover-pro
-- **التحديثات:** https://github.com/YOUR_USERNAME/vocal-remover-pro/releases
-- **المشاكل:** https://github.com/YOUR_USERNAME/vocal-remover-pro/issues
-- **Hugging Face:** https://huggingface.co/spaces/YOUR_USERNAME/vocal-remover-pro
-
----
 
 **الإصدار:** 2.0.0 | **آخر تحديث:** 2024-01-15
